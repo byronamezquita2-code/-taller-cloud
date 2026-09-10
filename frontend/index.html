@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Taller de Arquitectura Cloud</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 80px;
+        }
+
+        .contenedor {
+            max-width: 700px;
+            margin: auto;
+            background: #222;
+            padding: 40px;
+            border-radius: 15px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #respuesta {
+            margin-top: 25px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <h1>Taller de Arquitectura Cloud</h1>
+
+        <p>
+            Frontend desplegado en Vercel conectado
+            a un Backend desplegado en Render.
+        </p>
+
+        <button onclick="consultarServidor()">
+            Consultar servidor Cloud
+        </button>
+
+        <p id="respuesta">
+            Esperando respuesta...
+        </p>
+
+    </div>
+
+    <script>
+
+        async function consultarServidor() {
+
+            document.getElementById("respuesta").innerText =
+                "Consultando servidor...";
+
+            try {
+
+                const respuesta = await fetch(
+                    "http://localhost:3000/mensaje"
+                );
+
+                const datos = await respuesta.json();
+
+                document.getElementById("respuesta").innerText =
+                    datos.mensaje;
+
+            } catch (error) {
+
+                document.getElementById("respuesta").innerText =
+                    "No se pudo conectar con el servidor.";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
